@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Cache;
 
 class QueueTrackerCommand extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -26,26 +25,28 @@ class QueueTrackerCommand extends Command
 
         if ($this->option('watch')) {
             $this->info('Polling queue every 5 seconds. Press Ctrl+C to exit.');
-            while (true){
+            while (true) {
                 $current_job = Cache::get($cache_key);
 
-                if (!$current_job) {
+                if (! $current_job) {
                     $this->info('No job found in queue.');
-                }else{
+                } else {
                     $this->info('Currently processing job: '.$current_job);
                 }
 
                 sleep(5);
             }
-        }else{
+        } else {
             $current_job = Cache::get($cache_key);
 
-            if (!$current_job) {
+            if (! $current_job) {
                 $this->info('No job found in queue.');
+
                 return self::SUCCESS;
             }
 
             $this->info('Currently processing job: '.$current_job);
+
             return self::SUCCESS;
         }
 

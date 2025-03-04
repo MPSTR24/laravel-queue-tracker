@@ -27,7 +27,7 @@ class QueueTrackerServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-               QueueTrackerCommand::class,
+                QueueTrackerCommand::class,
             ]);
         }
 
@@ -38,12 +38,12 @@ class QueueTrackerServiceProvider extends ServiceProvider
             $queue = $event->job->getQueue() ?: 'default';
 
             // make cache key
-            $cache_key = 'queue_tracker_' . $queue;
+            $cache_key = 'queue_tracker_'.$queue;
             // using $queue so the user can pick
 
-            try{
+            try {
                 $job_name = $event->job->resolveName();
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 $job_name = get_class($event->job);
             }
 
@@ -66,7 +66,7 @@ class QueueTrackerServiceProvider extends ServiceProvider
     private function clearCache($event): void
     {
         $queue = $event->job->getQueue() ?: 'default';
-        $cache_key = 'queue_tracker_' . $queue;
+        $cache_key = 'queue_tracker_'.$queue;
         Cache::forget($cache_key);
     }
 }
