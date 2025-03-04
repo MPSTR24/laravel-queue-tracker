@@ -58,7 +58,7 @@ php artisan queue:track --watch
 - [ ] Larastan goals
     - [x] 5
     - [x] 6
-    - [ ] 7
+    - [x] 7
     - [ ] 8
     - [ ] 9
 
