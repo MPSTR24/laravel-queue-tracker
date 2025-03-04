@@ -13,7 +13,9 @@ class QueueTrackerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'queue:track {--queue=default : This will be "default" unless specified}';
+    protected $signature = 'queue:track
+                                {--queue=default : This will be "default" unless specified}
+                                {--watch : Use this to poll the current job in the queue}';
 
     protected $description = 'This command will display the current job in the selected queue.';
 
@@ -22,14 +24,30 @@ class QueueTrackerCommand extends Command
         $queue = $this->option('queue');
         $cache_key = 'queue_tracker_'.$queue;
 
-        $current_job = Cache::get($cache_key);
+        if ($this->option('watch')) {
+            $this->info('Polling queue every 5 seconds. Press Ctrl+C to exit.');
+            while (true){
+                $current_job = Cache::get($cache_key);
 
-        if (!$current_job) {
-            $this->info('No job found in queue.');
+                if (!$current_job) {
+                    $this->info('No job found in queue.');
+                }else{
+                    $this->info('Currently processing job: '.$current_job);
+                }
+
+                sleep(5);
+            }
+        }else{
+            $current_job = Cache::get($cache_key);
+
+            if (!$current_job) {
+                $this->info('No job found in queue.');
+                return self::SUCCESS;
+            }
+
+            $this->info('Currently processing job: '.$current_job);
             return self::SUCCESS;
         }
 
-        $this->info('Currently processing job: '.$current_job);
-        return self::SUCCESS;
     }
 }
