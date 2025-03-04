@@ -1,0 +1,63 @@
+{
+    "name": "mpstr24/laravel-queue-tracker",
+    "description": "",
+    "type": "package",
+    "license": "MIT",
+    "homepage": "https://github.com/MPSTR24/laravel-queue-tracker",
+    "keywords": [
+        "laravel",
+        "package",
+        "queue"
+    ],
+    "scripts": {
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "analyse": "phpstan analyse -v"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mpstr24\\QueueTracker\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mpstr24\\QueueTracker\\QueueTrackerServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        }
+    },
+    "authors": [
+        {
+            "name": "MPSTR24",
+            "email": "74561948+MPSTR24@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4|^10.1|^11.5",
+        "laravel/pint": "^1.14",
+        "orchestra/testbench": "^10.0.0||^9.0.0||^8.22.0",
+        "pestphp/pest": "^2.0 || ^3.0",
+        "pestphp/pest-plugin-laravel": "^2.0 || ^3.0",
+        "larastan/larastan": "^2.0 || ^3.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mpstr24\\QueueTracker\\Tests\\": "tests/",
+            "App\\": "tests/fake/app/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
