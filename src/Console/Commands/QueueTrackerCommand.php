@@ -20,11 +20,12 @@ class QueueTrackerCommand extends Command
 
     public function handle(): int
     {
-        $queue = $this->option('queue');
-        $cache_key = 'queue_tracker_'.$queue;
+        $queue = $this->normaliseUserInput($this->option('queue'));
+        $cache_key = 'queue_tracker_' . $queue;
 
         if ($this->option('watch')) {
             $this->info('Polling queue every 5 seconds. Press Ctrl+C to exit.');
+            // @phpstan-ignore while.alwaysTrue
             while (true) {
                 $current_job = Cache::get($cache_key);
 
@@ -50,5 +51,21 @@ class QueueTrackerCommand extends Command
             return self::SUCCESS;
         }
 
+    }
+
+    /**
+     * @param  array<mixed>|bool|string|null  $input
+     */
+    private function normaliseUserInput(array|bool|string|null $input): ?string
+    {
+        if (is_array($input)) {
+            $input = $input[0] ?? null;
+        }
+
+        if (is_bool($input)) {
+            $input = null;
+        }
+
+        return is_string($input) ? $input : null;
     }
 }

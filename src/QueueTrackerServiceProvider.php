@@ -63,7 +63,7 @@ class QueueTrackerServiceProvider extends ServiceProvider
         });
     }
 
-    private function clearCache($event): void
+    private function clearCache(JobProcessed|JobFailed $event): void
     {
         $queue = $event->job->getQueue() ?: 'default';
         $cache_key = 'queue_tracker_'.$queue;
