@@ -25,6 +25,7 @@ class QueueTrackerCommand extends Command
 
         if ($this->option('watch')) {
             $this->info('Polling queue every 5 seconds. Press Ctrl+C to exit.');
+            // @phpstan-ignore while.alwaysTrue
             while (true) {
                 $current_job = Cache::get($cache_key);
 

@@ -56,7 +56,7 @@ php artisan queue:track --watch
 - [ ] Job failure tracking
   - [ ] Error logging and analytics
 - [ ] Larastan goals
-    - [ ] 5
+    - [x] 5
     - [ ] 6
     - [ ] 7
     - [ ] 8
