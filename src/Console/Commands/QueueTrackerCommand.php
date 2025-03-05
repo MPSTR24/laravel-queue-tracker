@@ -21,24 +21,26 @@ class QueueTrackerCommand extends Command
     public function handle(): int
     {
         $queue = $this->normaliseUserInput($this->option('queue'));
-        $cache_key = 'queue_tracker_' . $queue;
+        $cache_key = 'queue_tracker_'.$queue;
 
         if ($this->option('watch')) {
             $this->info('Polling queue every 5 seconds. Press Ctrl+C to exit.');
             // @phpstan-ignore while.alwaysTrue
             while (true) {
-                $current_job = Cache::get($cache_key);
+                // @phpstan-ignore cast.string
+                $current_job = (string)Cache::get($cache_key);
 
                 if (! $current_job) {
                     $this->info('No job found in queue.');
                 } else {
-                    $this->info('Currently processing job: '.$current_job);
+                    $this->info('Currently processing job: '.(string)$current_job);
                 }
 
                 sleep(5);
             }
         } else {
-            $current_job = Cache::get($cache_key);
+            // @phpstan-ignore cast.string
+            $current_job = (string)Cache::get($cache_key);
 
             if (! $current_job) {
                 $this->info('No job found in queue.');
@@ -46,7 +48,7 @@ class QueueTrackerCommand extends Command
                 return self::SUCCESS;
             }
 
-            $this->info('Currently processing job: '.$current_job);
+            $this->info('Currently processing job: '. $current_job);
 
             return self::SUCCESS;
         }

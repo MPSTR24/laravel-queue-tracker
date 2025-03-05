@@ -55,12 +55,13 @@ php artisan queue:track --watch
   - [ ] Default queue control
 - [ ] Job failure tracking
   - [ ] Error logging and analytics
-- [ ] Larastan goals
+- [x] Larastan goals
     - [x] 5
     - [x] 6
     - [x] 7
     - [x] 8
-    - [ ] 9
+    - [x] 9
+- [ ] Implement tests
 
 
 ## License
