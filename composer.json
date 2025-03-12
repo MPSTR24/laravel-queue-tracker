@@ -1,6 +1,6 @@
 {
     "name": "mpstr24/laravel-queue-tracker",
-    "description": "",
+    "description": "Laravel package to allow you to track the active job in a queue on production.",
     "type": "package",
     "license": "MIT",
     "homepage": "https://github.com/MPSTR24/laravel-queue-tracker",
